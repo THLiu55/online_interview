@@ -3,15 +3,18 @@ from wtforms import ValidationError
 import config
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from blueprints.user import bp
 from exts import db
 import os
+
+
 #from blueprints import home_bp
 from models import User
 
 
 
 # 创建一个app对象
-app = Flask(__name__, template_folder="templates/dist", static_folder="templates/dist", static_url_path="")
+app = Flask(__name__, template_folder='dist/html/')
 
 # app.config[] 配置 配置项全部放到config里
 app.config.from_object(config)
@@ -19,7 +22,7 @@ db.init_app(app)
 # 配置数据库迁移
 migrate = Migrate(app, db)
 # 配置项目蓝图
-#app.register_blueprint(home_bp)
+app.register_blueprint(bp)
 
 # 配置session secret_key
 app.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")

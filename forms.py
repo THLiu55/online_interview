@@ -1,10 +1,10 @@
 import wtforms
-from flask import jsonify
 from flask_wtf import FlaskForm
+from werkzeug.security import check_password_hash
 from wtforms import TextAreaField, StringField, SubmitField, ValidationError
 from wtforms.validators import length, DataRequired, EqualTo, email, Length
-from models import EmailCaptchaModel,User
-from werkzeug.security import check_password_hash
+
+from models import EmailCaptchaModel, User
 
 
 class LoginFrom(wtforms.Form):
