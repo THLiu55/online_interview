@@ -80,14 +80,14 @@ Icons
   margin: 13px 0px 0px 15px;
   position: relative;
   float: left;
-  background-image: url(../image/退出登录.svg);
+  background-image: url(../image/exit.svg);
   background-size: 18px 18px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .i-more {
-  background-image: url(../image/其它.svg);
+  background-image: url(../image/other.svg);
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: center;
@@ -115,7 +115,7 @@ Icons
 }
 
 .i-left {
-  background-image: url(../image/关闭.svg);
+  background-image: url(../image/close.svg);
   background-size: 16px 16px;
   background-repeat: no-repeat;
   background-position: center;
