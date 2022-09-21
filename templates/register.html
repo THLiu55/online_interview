@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'><link rel="stylesheet" href="../css/login.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="back">
+    <canvas id="canvas" class="canvas-back"></canvas>
+</div>
+<div class='box'>
+  <div class='box-form'>
+    <div class='box-login-tab'></div>
+    <div class='box-login-title'>
+      <div class='i i-login'></div><h2>Register</h2>
+    </div>
+    <div class='box-login'>
+      <div class='fieldset-body' id='login_form'>
+        
+        	<p class='field'>
+          <label for='user'>E-MAIL</label>
+          <input type='text' id='user' name='user' title='Useremail' />
+          <span id='valida' class='i i-warning'></span>
+        </p>
+        <p class='field'>
+            <label for='pass'>CAPTCHA</label>
+            <input type='text' id='captcha' name='pass' title='CAPTCHA' />
+            <input type='submit' id='do_regist' value='SEND' title='SEND' />
+            <span id='valida' class='i i-close'></span>
+            
+
+          </p>
+
+          <p class='field'>
+            <label for='pass'>User Name</label>
+            <input type='password' id='username' name='pass' title='Username' />
+            <span id='valida' class='i i-close'></span>
+          </p>
+
+      	  <p class='field'>
+          <label for='pass'>PASSWORD</label>
+          <input type='password' id='pass' name='pass' title='Password' />
+          <span id='valida' class='i i-close'></span>
+        </p>
+        <p class='field'>
+            <label for='pass'>REAPEAT PASSWORD</label>
+            <input type='password' id='pass' name='pass' title='Password' />
+            <span id='valida' class='i i-close'></span>
+          </p>
+
+          <label class='checkbox'>
+            <input type='checkbox' onclick="return false" value='TRUE' checked="checked" title='Keep me Signed in' /> Agree to the User Agreement
+          </label>
+
+        	<input type='submit' id='do_login' value='GET STARTED' title='Sign up' />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+<script src="../paperJS/dist/paper-core.js"></script>
+<script src="../JS/indexCanvas.js"></script>
+</html>

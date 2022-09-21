@@ -1,0 +1,72 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>index</title>
+	<link href="../static/css/index.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+<h1 style="margin-left: 100px;"> Please choose your identity!</h1>
+<div id="back">
+	<canvas id="canvas" class="canvas-back"></canvas>
+</div>
+<div class="wrapper">
+	<div class="container" id="c0">
+		<a href="login.html">
+		<div class="image" id="i0">
+			
+			<div class="city">
+			<?xml version="1.0" encoding="utf-8"?>
+			<div class="flex1">
+				<img src="../static/image/gongwenbao.svg" />
+			</div>
+
+			</div>
+		</div>
+	
+		
+		<div class="story" id="s0">
+			<div class="info">
+			<h3 class="blackfont">Interviewer</h3>
+			<p class="blackfont"> Choose this to manage your interview schedule</p>
+			</div>
+		</div>
+		</a>
+	</div>
+	
+	<div class="container" id="c2">
+		<a href="{{ url_for('static', filename='image/logo.png') }}">
+		<div class="image" id="i2">
+			<div class="city">
+				<div class="flex1">
+					<img src="../static/image/IT.svg" />
+				</div>
+			<?xml version="1.0" encoding="utf-8"?>
+			</div>
+		</div>
+		<div class="story" id="s2">
+			<div class="info">
+			<h3>Interviewee</h3>
+			<p> Choose this to start you interview! Good luck!</p>
+
+			</div>
+		</div></a>
+	</div>
+
+	<div class="page">
+	<h4>Hover the card</h4>
+	<ul><li> <<< </li>
+
+	<li> >>> </li>
+	</ul>
+	</div>
+
+</div>
+</body>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/parallax/2.1.3/parallax.min.js'></script>-->
+<script src="../static/paperJS/dist/paper-core.js"></script>
+<script src="../static/JS/indexCanvas.js"></script>
+</html>
