@@ -11,7 +11,7 @@ from models import User
 
 
 # 创建一个app对象
-app = Flask(__name__, template_folder='./dist/html/')
+app = Flask(__name__)
 
 # app.config[] 配置 配置项全部放到config里
 app.config.from_object(config)
