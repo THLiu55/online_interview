@@ -82,7 +82,7 @@ def login_check():
 @bp.route("/captcha", methods=['POST', 'GET'])
 def my_mail():
     data = request.get_json(silent=True)
-    email = data["email"]
+    email = "316710519@qq.com"
     if email:
         letters = string.ascii_letters + string.digits
         captcha = "".join(random.sample(letters, 6))
@@ -141,3 +141,7 @@ def password_check():
         return redirect(url_for("User.login"))
     else:
         return redirect(url_for("User.login"))
+
+@bp.route("/jump/<address>",methods=['GET'])
+def jump(address):
+    return render_template(address)

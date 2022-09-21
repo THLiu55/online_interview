@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'><link rel="stylesheet" href="../css/login.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'><link rel="stylesheet" href="../static/css/login.css">
 
 </head>
 <body>
@@ -22,7 +22,8 @@
       <div class='fieldset-body' id='login_form'>
         
         	<p class='field'>
-          <label for='user'>E-MAIL</label>
+          <form action={{url_for('User.my_mail')}} method="post">
+           <label for='user'>E-MAIL</label>
           <input type='text' id='user' name='user' title='Useremail' />
           <span id='valida' class='i i-warning'></span>
         </p>
@@ -31,7 +32,7 @@
             <input type='text' id='captcha' name='pass' title='CAPTCHA' />
             <input type='submit' id='do_regist' value='SEND' title='SEND' />
             <span id='valida' class='i i-close'></span>
-            
+
 
           </p>
 
@@ -57,6 +58,7 @@
           </label>
 
         	<input type='submit' id='do_login' value='GET STARTED' title='Sign up' />
+      </form>
       </div>
     </div>
   </div>
@@ -65,6 +67,6 @@
 
 </body>
 
-<script src="../paperJS/dist/paper-core.js"></script>
-<script src="../JS/indexCanvas.js"></script>
+<script src="../static/paperJS/dist/paper-core.js"></script>
+<script src="../static/JS/indexCanvas.js"></script>
 </html>

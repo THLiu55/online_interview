@@ -7,7 +7,10 @@
 	<link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
-<h1 style="margin-left: 100px;"> Please choose your identity!</h1>
+<a href={{url_for("User.jump",address='login.html')}}>
+	<h1 style="margin-left: 100px;"> Please choose your identity!</h1>
+</a>
+
 <div id="back">
 	<canvas id="canvas" class="canvas-back"></canvas>
 </div>
@@ -24,8 +27,7 @@
 
 			</div>
 		</div>
-	
-		
+
 		<div class="story" id="s0">
 			<div class="info">
 			<h3 class="blackfont">Interviewer</h3>
@@ -36,7 +38,7 @@
 	</div>
 	
 	<div class="container" id="c2">
-		<a href="{{ url_for('static', filename='image/logo.png') }}">
+		<a href="enterroom.html"> </a>
 		<div class="image" id="i2">
 			<div class="city">
 				<div class="flex1">
