@@ -16,7 +16,7 @@ bp = Blueprint("User", __name__, url_prefix="/")
 @bp.route("/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('./html/index.html')
+        return render_template('index.html')
 
 # 用户登出
 @bp.route("/logout",methods=['GET'])
