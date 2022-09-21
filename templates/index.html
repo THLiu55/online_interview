@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
-<a href={{url_for("User.jump",address='login.html')}}>
 	<h1 style="margin-left: 100px;"> Please choose your identity!</h1>
 </a>
 
@@ -16,7 +15,7 @@
 </div>
 <div class="wrapper">
 	<div class="container" id="c0">
-		<a href="login.html">
+		<a href={{url_for("User.jump",address='login.html')}}>
 		<div class="image" id="i0">
 			
 			<div class="city">
@@ -38,7 +37,7 @@
 	</div>
 	
 	<div class="container" id="c2">
-		<a href="enterroom.html"> </a>
+		<a href={{url_for("User.jump",address='enterroom.html')}}>
 		<div class="image" id="i2">
 			<div class="city">
 				<div class="flex1">

@@ -81,15 +81,15 @@ def login_check():
 # 邮件发送功能
 @bp.route("/captcha", methods=['POST', 'GET'])
 def my_mail():
-    data = request.get_json(silent=True)
-    email = "316710519@qq.com"
+    # data = request.get_json(silent=True)
+    email = "tianhao.liu@ucdconnect.ie"
     if email:
         letters = string.ascii_letters + string.digits
         captcha = "".join(random.sample(letters, 6))
         message = Message(
             subject="online_interview 验证码",
             recipients=[email],
-            html=render_template("email.html", email_captcha=captcha)
+            # html=render_template("email.html", email_captcha=captcha)
         )
         mail.send(message)
         captcha_model = EmailCaptchaModel.query.filter_by(email=email).first()
@@ -145,3 +145,4 @@ def password_check():
 @bp.route("/jump/<address>",methods=['GET'])
 def jump(address):
     return render_template(address)
+
