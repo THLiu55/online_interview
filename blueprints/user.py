@@ -10,13 +10,13 @@ from flask_mail import Message
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 
-bp = Blueprint("User", __name__, url_prefix="/user")
+bp = Blueprint("User", __name__, url_prefix="/")
 
 # 登陆界面
-@bp.route("/login", methods=['GET', 'POST'])
+@bp.route("/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('./html/index.html')
 
 # 用户登出
 @bp.route("/logout",methods=['GET'])
@@ -59,7 +59,7 @@ def register_check():
 
 
 # 登录功能
-@bp.route("/login_form", methods=['POST', 'GET'])
+@bp.route("/login", methods=['POST', 'GET'])
 def login_check():
     # 读取json值
     data = request.get_json(silent=True)
