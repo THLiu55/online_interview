@@ -10,23 +10,24 @@ from flask_mail import Message
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 
-bp = Blueprint("User", __name__, url_prefix="/")
+
+user_bp = Blueprint("User", __name__, url_prefix="/")
 
 # 登陆界面
-@bp.route("/", methods=['GET', 'POST'])
+@user_bp.route("/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('index.html')
 
 # 用户登出
-@bp.route("/logout",methods=['GET'])
+@user_bp.route("/logout", methods=['GET'])
 @login_required
 def logout():
     logout_user()
     return None
 
 # 注册功能
-@bp.route("/register", methods=['POST', 'GET'])
+@user_bp.route("/register", methods=['POST', 'GET'])
 def register_check():
     data = request.get_json(silent=True)
     user_email = data["email"]
@@ -59,7 +60,7 @@ def register_check():
 
 
 # 登录功能
-@bp.route("/login", methods=['POST', 'GET'])
+@user_bp.route("/login", methods=['POST', 'GET'])
 def login_check():
     # 读取json值
     data = request.get_json(silent=True)
@@ -79,17 +80,17 @@ def login_check():
 
 
 # 邮件发送功能
-@bp.route("/captcha", methods=['POST', 'GET'])
+@user_bp.route("/captcha", methods=['POST', 'GET'])
 def my_mail():
-    # data = request.get_json(silent=True)
-    email = "tianhao.liu@ucdconnect.ie"
+    data = request.get_json(silent=True)
+    email = '2769059069@qq.com'
     if email:
         letters = string.ascii_letters + string.digits
         captcha = "".join(random.sample(letters, 6))
         message = Message(
             subject="online_interview 验证码",
             recipients=[email],
-            # html=render_template("email.html", email_captcha=captcha)
+            html=render_template("email.html", email_captcha=captcha),
         )
         mail.send(message)
         captcha_model = EmailCaptchaModel.query.filter_by(email=email).first()
@@ -108,8 +109,9 @@ def my_mail():
         return {"code": 400, "message": "请先传递邮箱！"}
 
 
+
 # 忘记密码功能-邮箱验证
-@bp.route("/forget_form_email", methods=['POST', 'GET'])
+@user_bp.route("/forget_form_email", methods=['POST', 'GET'])
 def email_check():
     data = request.get_json(silent=True)
     email = data["email"]
@@ -128,7 +130,7 @@ def email_check():
 
 
 # 忘记密码功能-密码更改
-@bp.route("/forget_form_password", methods=['POST', 'GET'])
+@user_bp.route("/forget_form_password", methods=['POST', 'GET'])
 def password_check():
     global the_email
     email = the_email
@@ -142,7 +144,7 @@ def password_check():
     else:
         return redirect(url_for("User.login"))
 
-@bp.route("/jump/<address>",methods=['GET'])
+@user_bp.route("/jump/<address>", methods=['GET'])
 def jump(address):
     return render_template(address)
 

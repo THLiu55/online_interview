@@ -1,14 +1,12 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, app
 from wtforms import ValidationError
 import config
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from blueprints.user import bp
-from exts import db
+from blueprints.user import user_bp
+from exts import db, mail
 import os
 from models import User
-
-
 
 # 创建一个app对象
 app = Flask(__name__)
@@ -16,10 +14,11 @@ app = Flask(__name__)
 # app.config[] 配置 配置项全部放到config里
 app.config.from_object(config)
 db.init_app(app)
+mail.init_app(app)
 # 配置数据库迁移
 migrate = Migrate(app, db)
 # 配置项目蓝图
-app.register_blueprint(bp)
+app.register_blueprint(user_bp)
 
 # 配置session secret_key
 app.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")
