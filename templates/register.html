@@ -70,9 +70,9 @@
 <script>
     /*axios获取验证码逻辑*/
     document.getElementById('do_regist').addEventListener('click', function (){
-        let Captcha = document.getElementById('captcha').value;
+        let user_email = document.getElementById('user').value;
         axios.post('/captcha', {
-            email: Captcha
+            email: user_email
         })
             .then(function (response) {
                 console.log(response);
