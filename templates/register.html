@@ -30,7 +30,7 @@
         <p class='field'>
             <label for='captcha'>CAPTCHA</label>
             <input type='text' id='captcha' name='pass' title='CAPTCHA' />
-            <input type='submit' id='do_regist' value='SEND' title='SEND' onclick="sendCaptcha()"/>
+            <button type='submit' id='do_regist' value='SEND' title='SEND'/>
             <span id='valida2' class='i i-close'></span>
 
 
@@ -67,7 +67,26 @@
 
 </body>
 
+<script>
+    /*axios获取验证码逻辑*/
+    document.getElementById('do_regist').addEventListener('click', function (){
+        let Captcha = document.getElementById('captcha').value;
+        axios.post('/captcha', {
+            email: Captcha
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    })
+</script>
+
+
 <script src="../static/paperJS/dist/paper-core.js"></script>
 <script src="../static/JS/indexCanvas.js"></script>
 <script src="../static/JS/RegisterAxios.js"></script>
+
+
 </html>

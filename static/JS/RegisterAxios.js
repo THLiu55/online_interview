@@ -1,18 +1,5 @@
 import axios from "axios";
 
-function sendCaptcha(){
-    var email = document.getElementById('user').value;
-
-    axios.post('/captcha', {
-        email: email
-    })
-        .then(function (response){
-            console.log(response);
-        })
-        .catch(function (error){
-            console.log(error);
-        })
-}
 
 function sendRegister(){
     var email = document.getElementById('user').value;
