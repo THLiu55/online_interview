@@ -95,5 +95,6 @@ input.user-password{
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  grid-template-columns: 99px 60px;
 
 }

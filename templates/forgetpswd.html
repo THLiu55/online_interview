@@ -8,7 +8,8 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
+
+
 <div id="back">
     <canvas id="canvas" class="canvas-back"></canvas>
 </div>
@@ -20,7 +21,7 @@
     <div class='box-login-title'>
         <a href="login.html">
       <div class='i i-login'></div></a>
-      <h2>Register</h2>
+      <h2>Forget</h2>
     </div>
     <div class='box-login'>
       <div class='fieldset-body' id='login_form'>
@@ -39,29 +40,20 @@
                   <span id='valida2' class='i i-close'></span>
               </p>
 
-              <p class='field'>
-                  <label for='username'>User Name</label>
-                  <input type='password' id='username' name='pass' title='Username'/>
-                  <span id='valida3' class='i i-close'></span>
-              </p>
 
               <p class='field'>
-                  <label for='pass'>PASSWORD</label>
+                  <label for='pass'>NEW PASSWORD</label>
                   <input type='password' id='pass' name='pass' title='Password'/>
                   <span id='valida4' class='i i-close'></span>
               </p>
               <p class='field'>
-                  <label for='pass_re'>REAPEAT PASSWORD</label>
+                  <label for='pass_re'>REAPEAT NEW PASSWORD</label>
                   <input type='password' id='pass_re' name='pass' title='Password'/>
                   <span id='valida5' class='i i-close'></span>
               </p>
 
-              <label class='checkbox'>
-                  <input type='checkbox' onclick="return false" value='TRUE' checked="checked"
-                         title='Keep me Signed in'/> Agree to the User Agreement
-              </label>
 
-              <button type='submit' id='do_login' title='Sign up' onmousedown="sendRegister()">GET STARTED</button>
+              <button type='submit' id='do_login' title='Sign up' onmousedown="sendRegister()">Change Password</button>
           </form>
       </div>
     </div>
