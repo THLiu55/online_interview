@@ -71,8 +71,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     /*axios获取验证码逻辑*/
-    let user_email = document.getElementById('user').value;
     function getCaptcha(){
+        let user_email = document.getElementById('user').value;
         console.log(user_email);
         axios.post('/captcha', {
             email: user_email
