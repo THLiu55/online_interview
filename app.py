@@ -20,7 +20,8 @@ migrate = Migrate(app, db)
 # 配置项目蓝图
 app.register_blueprint(user_bp)
 
-# 配置session secret_key
+# 配置session
+
 app.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")
 
 # 配置LoginManager

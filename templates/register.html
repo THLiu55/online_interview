@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'><link rel="stylesheet" href="../static/css/login.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'><link rel="stylesheet" href="../static/css/login.css">
 
 </head>
 <body>
@@ -14,51 +14,53 @@
 </div>
 <div class='box'>
   <div class='box-form'>
-    <div class='box-login-tab'></div>
+    <div class='box-login-tab'>
+
+    </div>
     <div class='box-login-title'>
       <div class='i i-login'></div><h2>Register</h2>
     </div>
     <div class='box-login'>
       <div class='fieldset-body' id='login_form'>
-        
-        	<p class='field'>
-          <form action={{url_for('User.my_mail')}} method="post">
-           <label for='user'>E-MAIL</label>
-          <input type='text' id='user' name='user' title='Useremail' />
-          <span id='valida1' class='i i-warning'></span>
-        </p>
-        <p class='field'>
-            <label for='captcha'>CAPTCHA</label>
-            <input type='text' id='captcha' name='pass' title='CAPTCHA' />
-            <button id='do_regist' title='SEND'>SEND</button>
-            <span id='valida2' class='i i-close'></span>
+          <form novalidate onsubmit="sendRegister()">
 
+              <p class="field">
+                  <label for='user'>E-MAIL</label>
+                  <input type='text' id='user' name='user' title='Useremail'/>
+                  <span id='valida1' class='i i-warning'></span>
+              </p>
 
-          </p>
+              <p class='field'>
+                  <label for='captcha'>CAPTCHA</label>
+                  <input type='text' id='captcha' name='pass' title='CAPTCHA'/>
+                  <button type="button" id='do_regist' title='SEND' onclick="getCaptcha()">SEND</button>
+                  <span id='valida2' class='i i-close'></span>
+              </p>
 
-          <p class='field'>
-            <label for='username'>User Name</label>
-            <input type='password' id='username' name='pass' title='Username' />
-            <span id='valida3' class='i i-close'></span>
-          </p>
+              <p class='field'>
+                  <label for='username'>User Name</label>
+                  <input type='password' id='username' name='pass' title='Username'/>
+                  <span id='valida3' class='i i-close'></span>
+              </p>
 
-      	  <p class='field'>
-          <label for='pass'>PASSWORD</label>
-          <input type='password' id='pass' name='pass' title='Password' />
-          <span id='valida4' class='i i-close'></span>
-        </p>
-        <p class='field'>
-            <label for='pass_re'>REAPEAT PASSWORD</label>
-            <input type='password' id='pass_re' name='pass' title='Password' />
-            <span id='valida5' class='i i-close'></span>
-          </p>
+              <p class='field'>
+                  <label for='pass'>PASSWORD</label>
+                  <input type='password' id='pass' name='pass' title='Password'/>
+                  <span id='valida4' class='i i-close'></span>
+              </p>
+              <p class='field'>
+                  <label for='pass_re'>REAPEAT PASSWORD</label>
+                  <input type='password' id='pass_re' name='pass' title='Password'/>
+                  <span id='valida5' class='i i-close'></span>
+              </p>
 
-          <label class='checkbox'>
-            <input type='checkbox' onclick="return false" value='TRUE' checked="checked" title='Keep me Signed in' /> Agree to the User Agreement
-          </label>
+              <label class='checkbox'>
+                  <input type='checkbox' onclick="return false" value='TRUE' checked="checked"
+                         title='Keep me Signed in'/> Agree to the User Agreement
+              </label>
 
-        	<input type='submit' id='do_login' value='GET STARTED' title='Sign up' onclick="sendRegister()"/>
-      </form>
+              <button type='submit' id='do_login' title='Sign up' onmousedown="sendRegister()">GET STARTED</button>
+          </form>
       </div>
     </div>
   </div>
@@ -66,11 +68,12 @@
 
 
 </body>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     /*axios获取验证码逻辑*/
-    document.getElementById('do_regist').addEventListener('click', function (){
-        let user_email = document.getElementById('user').value;
+    let user_email = document.getElementById('user').value;
+    function getCaptcha(){
+        console.log(user_email);
         axios.post('/captcha', {
             email: user_email
         })
@@ -80,13 +83,39 @@
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    /*axios提交register表单逻辑*/
+    function sendRegister(){
+    var email = document.getElementById('user').value;
+    var captcha = document.getElementById('captcha').value;
+    var name = document.getElementById('username').value;
+    var password = document.getElementById('pass').value;
+    var re_password = document.getElementById('pass_re').value;
+
+    axios.post('/register', {
+        email: email,
+        captcha: captcha,
+        userName: name,
+        password: password,
+        repassword: re_password
+
     })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
 </script>
 
 
 <script src="../static/paperJS/dist/paper-core.js"></script>
 <script src="../static/JS/indexCanvas.js"></script>
-<script src="../static/JS/RegisterAxios.js"></script>
+
 
 
 </html>

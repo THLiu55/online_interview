@@ -1,5 +1,3 @@
-import axios from "axios";
-
 
 function sendRegister(){
     var email = document.getElementById('user').value;

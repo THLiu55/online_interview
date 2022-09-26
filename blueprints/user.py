@@ -83,7 +83,7 @@ def login_check():
 @user_bp.route("/captcha", methods=['POST', 'GET'])
 def my_mail():
     data = request.get_json(silent=True)
-    email = '2769059069@qq.com'
+    email = data['email']
     if email:
         letters = string.ascii_letters + string.digits
         captcha = "".join(random.sample(letters, 6))
