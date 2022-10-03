@@ -24,7 +24,7 @@ class CreateInterviewModel(db.Model):
     user_email=db.Column(db.CHAR(200),primary_key=True)
     room_id=db.Column(db.Integer,primary_key=True)
     position = db.Column(db.CHAR(100),nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     time = db.Column(db.TIMESTAMP, nullable=False)
     time_span = db.Column(db.Integer,nullable=False)
     interviewee_name = db.Column(db.CHAR, nullable=False)

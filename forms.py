@@ -74,3 +74,11 @@ class ForgetFormEmail(wtforms.Form):
 class ForgetFormPassword(wtforms.Form):
     user_password = wtforms.StringField(validators=[DataRequired("密码不能为空"), length(min=3, max=20)])
     confirm = wtforms.StringField(validators=[EqualTo('user_password')])
+
+
+class ScheduleForm(wtforms.Form):
+    position = wtforms.StringField(validators=[DataRequired("职位不能为空"), email()])
+    date = wtforms.DateField(validators=[DataRequired("日期不能为空")])
+    time = wtforms.TimeField(validators=[DataRequired("密码不能为空")])
+    time_span = wtforms.IntegerField(validators=[length(min=0, max=6)])
+    interviewee_name = wtforms.StringField(validators=[DataRequired("用户名不能为空")])
