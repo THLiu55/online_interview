@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -67,7 +67,6 @@
     /*axios获取验证码逻辑*/
     function getCaptcha(){
         let user_email = document.getElementById('user').value;
-        console.log(user_email);
         axios.post('/captcha', {
             email: user_email
         })

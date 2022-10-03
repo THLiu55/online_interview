@@ -118,9 +118,11 @@
           </div>
         </div>
         <div id="uncomingevents"class="project-boxes jsGridView">
+          <!--这里是面试信息块 -->
           <div class="project-box-wrapper">
             <div class="project-box">
               <div class="project-box-header">
+                <!--     这里是信息块中的日期           -->
                 <span>8:00 AM December 10, 2020</span>
                 <div class="more-wrapper">
                   <button class="project-btn-more">
@@ -137,20 +139,22 @@
 
               <div class="centerbox">
                 <div class="project-box-content-header">
-
+                  <!-- 这里是面试官名称 -->
                   <p class="box-content-header">Jiwei Xu</p>
-
+                  <!-- 这里是面试官职位 -->
                   <p class="box-content-subheader">Front-end Web developer</p>
-
+                  <!-- 这里是面试时间跨度 -->
                   <p class="box-content-subheader">Time span : <i>100min</i></p>
                 </div>
               </div>
 
               <div class="box-progress-wrapper">
+                <!--    这里是面试进程状态   -->
                 <p class="box-progress-header">State: <em>In progress</em></p>
                 <div class="box-progress-bar">
                   <span class="box-progress" style="width: 60%; background-color: #4f3ff0"></span>
                 </div>
+                <!--    进程百分比显示  -->
                 <p class="box-progress-percentage">60%</p>
               </div>
               <div class="project-box-footer">
@@ -169,12 +173,15 @@
                     </svg>
                   </button>
                 </div>
+                <!--    剩余时间显示    -->
                 <div class="days-left" style="color: #4f3ff0;">
                   2 Days Left
                 </div>
               </div>
             </div>
           </div>
+          <!--  --------------块分界线   -->
+
           <div class="project-box-wrapper">
             <div class="project-box">
               <div class="project-box-header">
@@ -329,9 +336,11 @@
               </div>
             </div>
           </div>
+          <!--  注意注意！！这里是面试信息块    -->
           <div class="project-box-wrapper">
             <div class="project-box">
               <div class="project-box-header">
+                <!--    面试日期       -->
                 <span>December 10, 2020</span>
                 <div class="more-wrapper">
                   <button class="project-btn-more">
@@ -561,39 +570,65 @@
         <div class="messages">
           <div class="message-box">
             <div class="contentbox">
-              <p class="biggersize"><strong><em>Position:</em></strong> </p>
-              <select class="form-control" style="min-width:300px ; ">
-                <option>Product Manager</option>
-                <option>Web developer</option>
-                <option>Software developer</option>
-              </select>
-              <div class="smallbox">
-                <p class="biggersize"><strong><em>Date:</em></strong> </p>
-                <input class="form-control" type="date">
-              </div>
-              <div class="smallbox">
-                <p class="biggersize"><strong><em>Time:</em></strong> </p>
-                <input class="form-control" type="time">
-              </div>
-              <div class="smallbox">
-                <p class="biggersize"><strong><em>Time span: (min)</em></strong> </p>
-                <input class="form-control" type="number" step="20">
-              </div>
-              <div class="smallbox">
-                <p class="biggersize"><strong><em>Interviewee name</em></strong> </p>
-                <input class="form-control" type="text">
-              </div>
-              <div class="smallbox alignclass" style="margin-top: 25px">
-                <input  class="btn btn-primary" type="button" value="Create a new interview">
-              </div>
+              <form novalidate onsubmit="getRegister()">
+                <p class="biggersize"><strong><em>Position:</em></strong> </p>
+                <select id="position" class="form-control" style="min-width:300px ; ">
+                  <option>Product Manager</option>
+                  <option>Web developer</option>
+                  <option>Software developer</option>
+                </select>
+                <div class="smallbox">
+                  <p class="biggersize"><strong><em>Date:</em></strong> </p>
+                  <input id="date" class="form-control" type="date">
+                </div>
+                <div class="smallbox">
+                  <p class="biggersize"><strong><em>Time:</em></strong> </p>
+                  <input id="time" class="form-control" type="time">
+                </div>
+                <div class="smallbox">
+                  <p class="biggersize"><strong><em>Time span: (min)</em></strong> </p>
+                  <input id="time_span" class="form-control" type="number" step="20">
+                </div>
+                <div class="smallbox">
+                  <p class="biggersize"><strong><em>Interviewee name</em></strong> </p>
+                  <input id="interviewee_name" class="form-control" type="text">
+                </div>
+                <div class="smallbox alignclass" style="margin-top: 25px">
+                  <input class="btn btn-primary" type="submit" value="Create a new interview">
+                </div>
+              </form>
             </div>
-            
           </div>
         </div>
       </div>
     </div>
   </div>
   <script src="../static/JS/schedule.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      /*输入信息获取逻辑*/
+      function getRegister(){
+        var pos = document.getElementById('position').value;
+        var date_appointment = document.getElementById('date').value;
+        var time_appointment =  document.getElementById('time').value;
+        var Time_span = document.getElementById('time_span').value;
+        var name = document.getElementById('interviewee_name').value;
+        axios.post('/schedule',{
+          position : pos,
+          date : date_appointment,
+          time : time_appointment,
+          time_span : Time_span,
+          interviewee_name : name
+        })
+                .then(function (response) {
+                  console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+      }
+  </script>
+
 
 </body>
 
