@@ -21,6 +21,8 @@ class EmailCaptchaModel(db.Model):
 
 class CreateInterviewModel(db.Model):
     __tablename__ = "create_interview"
+    user_email=db.Column(db.CHAR(200),primary_key=True)
+    room_id=db.Column(db.Integer,primary_key=True)
     position = db.Column(db.CHAR(100),nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     time = db.Column(db.TIMESTAMP, nullable=False)
