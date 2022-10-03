@@ -22,7 +22,7 @@ class EmailCaptchaModel(db.Model):
 class CreateInterviewModel(db.Model):
     __tablename__ = "create_interview"
     position = db.Column(db.CHAR(100),nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     time = db.Column(db.TIMESTAMP, nullable=False)
     time_span = db.Column(db.Integer,nullable=False)
     interviewee_name = db.Column(db.CHAR, nullable=False)
