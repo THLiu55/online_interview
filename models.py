@@ -26,3 +26,12 @@ class CreateInterviewModel(db.Model):
     time = db.Column(db.TIMESTAMP, nullable=False)
     time_span = db.Column(db.Integer,nullable=False)
     interviewee_name = db.Column(db.CHAR, nullable=False)
+
+
+class Room(db.Model):
+    __tablename__ = "room"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    finished = db.Column(db.BOOLEAN, default=False)
+    video_address=db.Column(db.CHAR(500))
+    white_board=db.Column(db.CHAR(500))
+    code_document=db.Column(db.Text())
