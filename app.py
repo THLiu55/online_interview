@@ -4,6 +4,7 @@ import config
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from blueprints.user import user_bp
+from blueprints.schedule import schedule_bp
 from exts import db, mail
 import os
 from models import User
@@ -19,6 +20,7 @@ mail.init_app(app)
 migrate = Migrate(app, db)
 # 配置项目蓝图
 app.register_blueprint(user_bp)
+app.register_blueprint(schedule_bp)
 
 # 配置session
 
