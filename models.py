@@ -34,6 +34,6 @@ class Room(db.Model):
     __tablename__ = "room"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     finished = db.Column(db.BOOLEAN, default=False)
-    video_address=db.Column(db.CHAR(500))
-    white_board=db.Column(db.CHAR(500))
+    video_address=db.Column(db.CHAR(255))
+    white_board=db.Column(db.CHAR(255))
     code_document=db.Column(db.Text())
