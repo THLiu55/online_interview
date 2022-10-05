@@ -21,13 +21,13 @@ class EmailCaptchaModel(db.Model):
 
 class CreateInterviewModel(db.Model):
     __tablename__ = "create_interview"
-    user_email=db.Column(db.CHAR(200),primary_key=True)
-    room_id=db.Column(db.Integer,primary_key=True)
-    position = db.Column(db.CHAR(100),nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    time = db.Column(db.TIMESTAMP, nullable=False)
-    time_span = db.Column(db.Integer,nullable=False)
-    interviewee_name = db.Column(db.CHAR, nullable=False)
+    user_email=db.Column(db.CHAR(200),primary_key=True, default="hhh@qq.com")
+    room_id=db.Column(db.Integer,primary_key=True, default=1, autoincrement=True)
+    position = db.Column(db.CHAR(100),nullable=False, default="pos")
+    date = db.Column(db.DATE, nullable=False, default="yyyy-mm-dd")
+    time = db.Column(db.TIME, nullable=False, default="hh:mm:ss")
+    time_span = db.Column(db.Integer,nullable=False, default=20)
+    interviewee_name = db.Column(db.CHAR(200), nullable=False, default="test")
 
 
 class Room(db.Model):
