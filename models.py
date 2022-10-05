@@ -9,7 +9,7 @@ class User(UserMixin, db.Model):
     user_email = db.Column(db.CHAR(200), primary_key=True, nullable=False, unique=True)
 
     def get_id(self):
-        return self.user_id
+        return self.user_email
 
 class EmailCaptchaModel(db.Model):
     __tablename__ = "email_captcha"

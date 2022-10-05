@@ -1,7 +1,7 @@
 import random
 import string
 
-from flask import Blueprint, request, render_template, redirect, url_for, jsonify
+from flask import Blueprint, request, render_template, redirect, url_for, jsonify, session
 from forms import LoginFrom, RegisterForm, EmailCaptchaModel, ForgetFormPassword
 from flask_login import login_user, logout_user, login_required
 from models import User
@@ -63,20 +63,20 @@ def register_check():
 @user_bp.route("/login", methods=['POST', 'GET'])
 def login_check():
     # 读取json值
-    data = request.get_json(silent=True)
-    user_email = data["email"]
-    user_password = data["password"]
+    user_email = request.form.get("user")
+    print(user_email)
+    user_password = request.form.get("pass")
     login_form = LoginFrom(user_email=user_email, user_password=user_password)
-
+    session['user_email'] = user_email
     if login_form.validate():
         user = User.query.filter_by(user_email=user_email).first()
-        login_user(user)
-        return jsonify({"code":200})
-    else:
-        if login_form.errors.get("user_email"):
-            return jsonify({"code": 400, "message": "email"})
-        elif login_form.errors.get("user_password"):
-            return jsonify({"code": 400, "message": "password"})
+        # login_user(user)
+        return render_template("schedule.html")
+    # else:
+    #     if login_form.errors.get("user_email"):
+    #         return jsonify({"code": 400, "message": "email"})
+    #     elif login_form.errors.get("user_password"):
+    #         return jsonify({"code": 400, "message": "password"})
 
 
 # 邮件发送功能

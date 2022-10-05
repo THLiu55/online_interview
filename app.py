@@ -17,7 +17,7 @@ app.config.from_object(config)
 db.init_app(app)
 mail.init_app(app)
 # 配置数据库迁移
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 # 配置项目蓝图
 app.register_blueprint(user_bp)
 app.register_blueprint(schedule_bp)
