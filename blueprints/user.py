@@ -19,7 +19,7 @@ def login():
     if request.method == 'GET':
         return render_template('index.html')
 
-# 用户登出
+#用户登出
 @user_bp.route("/logout", methods=['GET'])
 @login_required
 def logout():
@@ -72,6 +72,8 @@ def login_check():
         user = User.query.filter_by(user_email=user_email).first()
         # login_user(user)
         return render_template("schedule.html")
+    else:
+        return render_template("login.html")
     # else:
     #     if login_form.errors.get("user_email"):
     #         return jsonify({"code": 400, "message": "email"})
