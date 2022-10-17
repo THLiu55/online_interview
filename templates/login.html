@@ -25,7 +25,7 @@
     <div class='box-login'>
       <form action="{{ url_for('User.login_check') }}" method="post">
           <div class='fieldset-body' id='login_form'>
-        <button onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></button>
+        <button onclick="openLoginInfo();return false;" class='b b-form i i-more' title='Mais Informações'></button>
         	<p class='field'>
           <label for='user'>E-MAIL</label>
           <input type='text' id='user' name='user' title='Username' />
