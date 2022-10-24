@@ -17,28 +17,11 @@ def register_check():
     time = data['time']
     time_span = data["time_span"]
     interviewee_name = data["interviewee_name"]
-    # schedule_form = ScheduleForm(user_email=user_email, position=position, date=date, time=time, time_span=time_span,
-    #                              interviewee_name=interviewee_name)
-    # if schedule_form.validate():
+
+
     if True:
          # 构建CreateInterviewModel模型
-         create_interview_model = CreateInterviewModel(user_email=user_email, position=position, date=date, time=time, time_span=time_span, interviewee_name=interviewee_name)
-         # createInterviewModel.position = position
-         # createInterviewModel.date = date
-         # createInterviewModel.time = time
-         # createInterviewModel.time_span = time_span
-         # createInterviewModel.interviewee_name = interviewee_name
-         db.session.add(create_interview_model)
-         db.session.commit()
-         return render_template("enterroom.html")
-    # else:
-    #     if schedule_form.errors.get("position"):
-    #         return jsonify({"code":400,"message": "invalidPosition"})
-    #     elif schedule_form.errors.get("date"):
-    #         return jsonify({"code":400, "message": "invalidDate"})
-    #     elif schedule_form.errors.get("time"):
-    #         return jsonify({"code":400,"message":"invalidTime"})
-    #     elif schedule_form.errors.get("time_span"):
-    #         return jsonify({"code":400,"message":"invalidTime_span"})
-    #     else:
-    #         return jsonify({"code":400,"message":"invalidInterviewee_name"})
+        create_interview_model = CreateInterviewModel(user_email=user_email, room_id=1, position=position, date=date, time=time, time_span=time_span, interviewee_name=interviewee_name)
+        db.session.add(create_interview_model)
+        db.session.commit()
+        return render_template("enterroom.html")

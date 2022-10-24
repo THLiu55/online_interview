@@ -33,6 +33,7 @@ class CreateInterviewModel(db.Model):
 class Room(db.Model):
     __tablename__ = "room"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_email=db.Column(db.CHAR(200))
     finished = db.Column(db.BOOLEAN, default=False)
     video_address=db.Column(db.CHAR(255))
     white_board=db.Column(db.CHAR(255))
