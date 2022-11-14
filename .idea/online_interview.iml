@@ -10,6 +10,12 @@
     <orderEntry type="jdk" jdkName="Python 3.9 (flaskProject1)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="style" level="application" />
+    <orderEntry type="library" name="getHTMLMediaElement" level="application" />
+    <orderEntry type="library" name="EBML" level="application" />
+    <orderEntry type="library" name="@mattiasbuelens/web-streams-polyfill" level="application" />
+    <orderEntry type="library" name="adapter-latest" level="application" />
+    <orderEntry type="library" name="DetectRTC" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />

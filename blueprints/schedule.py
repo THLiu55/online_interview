@@ -1,9 +1,7 @@
 from flask import Blueprint, request, jsonify, session, render_template, redirect, url_for
-from datetime import datetime
-
-from models import CreateInterviewModel, User
+from models import CreateInterviewModel, User, Room
 from exts import db
-from forms import ScheduleForm
+
 
 schedule_bp = Blueprint("schedule", __name__, url_prefix="/schedule")
 
@@ -12,7 +10,8 @@ schedule_bp = Blueprint("schedule", __name__, url_prefix="/schedule")
 def create():
     if request.method == "GET":
         user = User.query.filter_by(user_email=session['user_email']).first()
-        return render_template("schedule.html", username=user.user_name)
+        interviews = CreateInterviewModel.query.filter_by(user_email=session['user_email']).all()
+        return render_template("schedule.html", username=user.user_name, interviews=interviews)
     else:
         pos = request.form.get("pos")
         email = request.form.get("email")
@@ -28,6 +27,11 @@ def create():
         create_interview_model.time_span = span
         create_interview_model.position = pos
         db.session.add(create_interview_model)
+        db.session.commit()
+
+        room = Room()
+        room.finished = 0
+        db.session.add(room)
         db.session.commit()
         return redirect(url_for("schedule.create"))
 

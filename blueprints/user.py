@@ -4,27 +4,29 @@ import string
 from flask import Blueprint, request, render_template, redirect, url_for, jsonify, session
 from forms import LoginFrom, RegisterForm, EmailCaptchaModel, ForgetFormPassword
 from flask_login import login_user, logout_user, login_required
-from models import User, Room
+from models import User, Room, CreateInterviewModel
 from exts import db, mail
 from flask_mail import Message
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 
-
 user_bp = Blueprint("User", __name__, url_prefix="/")
+
 
 # 登陆界面
 @user_bp.route("/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template("index.html")
 
-#用户登出
+
+# 用户登出
 @user_bp.route("/logout", methods=['GET'])
 @login_required
 def logout():
     logout_user()
     return None
+
 
 # 注册功能
 @user_bp.route("/register", methods=['POST', 'GET'])
@@ -49,14 +51,13 @@ def register_check():
         return jsonify({"code": 200, "message": "Sign up successfully!"})
     else:
         if register_form.errors.get("user_email"):
-            return jsonify({"code":400,"message": "invalidSignUpEmail"})
+            return jsonify({"code": 400, "message": "invalidSignUpEmail"})
         elif register_form.errors.get("captcha"):
-            return jsonify({"code":400, "message": "invalidSignUpCaptcha"})
+            return jsonify({"code": 400, "message": "invalidSignUpCaptcha"})
         elif register_form.errors.get("user_name"):
-            return jsonify({"code":400,"message":"invalidSignUpUserName"})
+            return jsonify({"code": 400, "message": "invalidSignUpUserName"})
         else:
-            return jsonify({"code":400,"message":"invalidSignUpPassword"})
-
+            return jsonify({"code": 400, "message": "invalidSignUpPassword"})
 
 
 # 登录功能
@@ -69,15 +70,10 @@ def login_check():
     session['user_email'] = user_email
     if login_form.validate():
         user = User.query.filter_by(user_email=user_email).first()
-        # login_user(user)
-        return render_template("schedule.html", username=user.user_name)
+        interviews = CreateInterviewModel.query.filter_by(user_email=user_email).all()
+        return render_template("schedule.html", username=user.user_name, interviews=interviews)
     else:
         return render_template("login.html")
-    # else:
-    #     if login_form.errors.get("user_email"):
-    #         return jsonify({"code": 400, "message": "email"})
-    #     elif login_form.errors.get("user_password"):
-    #         return jsonify({"code": 400, "message": "password"})
 
 
 # 邮件发送功能
@@ -108,7 +104,6 @@ def my_mail():
     else:
         # code:400,客户端错误
         return {"code": 400, "message": "请先传递邮箱！"}
-
 
 
 # 忘记密码功能-邮箱验证
@@ -151,15 +146,30 @@ def jump(address):
     return render_template(address)
 
 
-@user_bp.route("/finish",methods=['POST','GET'])
+@user_bp.route("/finish", methods=['POST', 'GET'])
 def finish():
     room = Room()
     room.finished = 1
-    room.video_address=0
+    room.video_address = 0
 
 
-@user_bp.route("/video",methods=['POST','GET'])
-def video():
+@user_bp.route("/video/<room_id>", methods=['POST', 'GET'])
+def video(room_id):
     file = request.files.get("file")
+    if file:
+        file.save('templates\\'+room_id + ".webm")
+    room = Room.query.filter_by(id=room_id).first()
+    room.finished = 1
+    db.session.commit()
+    return render_template("review.html", src=room_id+".webm")
 
+
+@user_bp.route("/enter/<room_id>/", methods=['POST', 'GET'])
+def enter(room_id):
+    room = Room.query.filter_by(id=room_id).first()
+    user = User.query.filter_by(user_email=session['user_email']).first()
+    if room.finished == 1:
+        return render_template("review.html", src=room_id + ".webm")
+    else:
+        return render_template("record.html", name=user.user_name, room_id=room.id)
 
