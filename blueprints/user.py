@@ -4,7 +4,7 @@ import string
 from flask import Blueprint, request, render_template, redirect, url_for, jsonify, session
 from forms import LoginFrom, RegisterForm, EmailCaptchaModel, ForgetFormPassword
 from flask_login import login_user, logout_user, login_required
-from models import User
+from models import User, Room
 from exts import db, mail
 from flask_mail import Message
 from datetime import datetime
@@ -64,14 +64,13 @@ def register_check():
 def login_check():
     # 读取json值
     user_email = request.form.get("user")
-    print(user_email)
     user_password = request.form.get("pass")
     login_form = LoginFrom(user_email=user_email, user_password=user_password)
     session['user_email'] = user_email
     if login_form.validate():
         user = User.query.filter_by(user_email=user_email).first()
         # login_user(user)
-        return render_template("schedule.html")
+        return render_template("schedule.html", username=user.user_name)
     else:
         return render_template("login.html")
     # else:
@@ -146,7 +145,21 @@ def password_check():
     else:
         return redirect(url_for("User.login"))
 
+
 @user_bp.route("/jump/<address>", methods=['GET'])
 def jump(address):
     return render_template(address)
+
+
+@user_bp.route("/finish",methods=['POST','GET'])
+def finish():
+    room = Room()
+    room.finished = 1
+    room.video_address=0
+
+
+@user_bp.route("/video",methods=['POST','GET'])
+def video():
+    file = request.files.get("file")
+
 

@@ -1,41 +1,44 @@
-from flask import Blueprint, request, jsonify, session, render_template
+from flask import Blueprint, request, jsonify, session, render_template, redirect, url_for
 from datetime import datetime
 
-from models import CreateInterviewModel
+from models import CreateInterviewModel, User
 from exts import db
 from forms import ScheduleForm
 
-schedule_bp = Blueprint("schedule", __name__, url_prefix="/")
+schedule_bp = Blueprint("schedule", __name__, url_prefix="/schedule")
 
-@schedule_bp.route("/schedule", methods=['POST', 'GET'])
-def register_check():
-    data = request.get_json(silent=True)
-    user_email = session.get('user_email')
-    print("session",session.get('user_email'))
-    position = data['position']
-    print(position)
-    date = data['date']
-    print(date)
-    time = data['time']
-    print(time)
-    time_span = data["time_span"]
-    print(time_span)
-    interviewee_name = data["interviewee_name"]
-    print(interviewee_name)
 
-    if True:
-         # 构建CreateInterviewModel模型
-        create_interview_model = CreateInterviewModel(user_email=user_email, room_id=1, position=position, date=date, time=time, time_span=time_span, interviewee_name=interviewee_name)
+@schedule_bp.route("/create", methods=['POST', 'GET'])
+def create():
+    if request.method == "GET":
+        user = User.query.filter_by(user_email=session['user_email']).first()
+        return render_template("schedule.html", username=user.user_name)
+    else:
+        pos = request.form.get("pos")
+        email = request.form.get("email")
+        date = request.form.get("date")
+        time = request.form.get("time")
+        span = request.form.get("time_span")
+        iname = request.form.get("iname")
+        create_interview_model = CreateInterviewModel()
+        create_interview_model.user_email = email
+        create_interview_model.interviewee_name = iname
+        create_interview_model.date = date
+        create_interview_model.time = time
+        create_interview_model.time_span = span
+        create_interview_model.position = pos
         db.session.add(create_interview_model)
         db.session.commit()
-        return render_template("enterroom.html")
+        return redirect(url_for("schedule.create"))
 
-@bp.route("/total_interview", methods=['GET'])
+
+@schedule_bp.route("/total_interview", methods=['GET'])
 def get_total_interview():
     total_interview = len(CreateInterviewModel.query.filter_by().all())
     return jsonify({'total_interview': total_interview}), 200
 
-@bp.route("/per_interview")
+
+@schedule_bp.route("/per_interview")
 def get_per_interview():
     per_interview = CreateInterviewModel.query.all()
     data = []

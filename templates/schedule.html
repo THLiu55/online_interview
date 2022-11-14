@@ -40,7 +40,7 @@
        
         <button class="profile-btn">
           <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
-          <span>Aybüke C.</span>
+          <span>{{ username }}</span>
         </button>
       </div>
       <button class="messages-btn">
@@ -570,32 +570,32 @@
         <div class="messages">
           <div class="message-box">
             <div class="contentbox">
-              <form novalidate onsubmit="getRegister()">
+              <form method="post" action={{url_for("schedule.create")}}>
                 <p class="biggersize"><strong><em>Position:</em></strong> </p>
-                <select id="position" class="form-control" style="min-width:300px ; ">
+                <select id="position" name="pos" class="form-control" style="min-width:300px ; ">
                   <option>Product Manager</option>
                   <option>Web developer</option>
                   <option>Software developer</option>
                 </select>
                 <div class="smallbox">
                   <p class="biggersize"><strong><em>Email Address:</em></strong> </p>
-                  <input id="date" class="form-control" type="email">
+                  <input id="date" name="email" class="form-control" type="email">
                 </div>
                 <div class="smallbox">
                   <p class="biggersize"><strong><em>Date:</em></strong> </p>
-                  <input id="date" class="form-control" type="date">
+                  <input id="date" name="date" class="form-control" type="date">
                 </div>
                 <div class="smallbox">
                   <p class="biggersize"><strong><em>Time:</em></strong> </p>
-                  <input id="time" class="form-control" type="time">
+                  <input id="time" name="time" class="form-control" type="time">
                 </div>
                 <div class="smallbox">
                   <p class="biggersize"><strong><em>Time span: (min)</em></strong> </p>
-                  <input id="time_span" class="form-control" type="number" step="20">
+                  <input id="time_span" name="time_span" class="form-control" type="number" step="20">
                 </div>
                 <div class="smallbox">
                   <p class="biggersize"><strong><em>Interviewee name</em></strong> </p>
-                  <input id="interviewee_name" class="form-control" type="text">
+                  <input id="interviewee_name" name="iname" class="form-control" type="text">
                 </div>
                 <div class="smallbox alignclass" style="margin-top: 25px">
                   <input class="btn btn-primary" type="submit" value="Create a new interview">
@@ -609,29 +609,6 @@
   </div>
   <script src="../static/JS/schedule.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-      /*输入信息获取逻辑*/
-      function getRegister(){
-        var pos = document.getElementById('position').value;
-        var date_appointment = document.getElementById('date').value;
-        var time_appointment =  document.getElementById('time').value;
-        var Time_span = document.getElementById('time_span').value;
-        var name = document.getElementById('interviewee_name').value;
-        axios.post('/schedule',{
-          position : pos,
-          date : date_appointment,
-          time : time_appointment,
-          time_span : Time_span,
-          interviewee_name : name
-        })
-                .then(function (response) {
-                  console.log(response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-      }
-  </script>
 
 
 </body>
