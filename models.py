@@ -36,6 +36,5 @@ class Room(db.Model):
     user_email=db.Column(db.CHAR(200))
     finished = db.Column(db.BOOLEAN, default=False)
     video_address=db.Column(db.CHAR(255))
-    white_board=db.Column(db.CHAR(255))
     code_document=db.Column(db.Text())
     close_time=db.Column(db.DateTime, default=datetime.now)
