@@ -15,6 +15,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <link rel="stylesheet" href="https://www.webrtc-experiment.com/style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+  <link rel="stylesheet" href='/static/css/record.css'>
 
   <style>
     li {
@@ -95,6 +98,105 @@
 
 <body>
 
+
+  <div class="section over-hide">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section text-center py-5 py-md-0">
+			          	<input class="pricing" type="checkbox" id="pricing" name="pricing"/>
+			          	<label for="pricing"><span class="block-diff">Record<span class="float-right">Upload</span></span></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="pricing-wrap">
+										<h4 class="mb-1" style="margin-bottom: 0;">Recording</h4>
+                    <h1 class="mb-1" style="border-bottom: none;"><a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
+                      {{ name }}
+                  </a>
+                    <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
+                        {{ room_id }}
+                    </a>
+                </h1>
+										<h2 class="mb-2" style="font-size: 14px;">Start record the interview</h2>
+										<p class="mb-4" style="font-size: 14px;"> and download it</p>
+										<!-- <p class="mb-1"><i class="uil uil-location-pin-alt size-22"></i></p>
+										<p class="mb-4">Drina, Serbia</p> -->
+                    <button id="save-to-disk" class="link"  >Save To Disk</button>
+                    <p></p>
+                    <button id="btn-start-recording" class="link" >Start Recording</button>
+										<!-- <a href="#0" class="link">Choose Date</a> -->
+										<div class="img-wrap img-2">
+											<img src="https://assets.codepen.io/1462889/sea.png" alt="">
+										</div>
+										<div class="img-wrap img-1">
+											<img src="https://assets.codepen.io/1462889/kayak.png" alt="">
+										</div>
+										<div class="img-wrap img-3">
+											<img src="https://assets.codepen.io/1462889/water.png" alt="">
+										</div>
+										<div class="img-wrap img-6">
+											<img src="https://assets.codepen.io/1462889/Stone.png" alt="">
+										</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="pricing-wrap">
+										<h4 class="mb-5">Upload</h4>
+										<h2 class="mb-2" style="font-size: 14px;">upload video you record to watch</h2>
+										<!-- <p class="mb-4">per person</p> -->
+                    
+                  <form action="{{ url_for('User.video',room_id=room_id) }}" enctype="multipart/form-data" method="post">
+										<input class="link" type="file" name="file" style="max-width:250px ;">
+										<p></p>
+    									<button type="submit" class="link">Finish</button>
+                    </form>
+										<!-- <p class="mb-1"><i class="uil uil-location-pin-alt size-22"></i></p>
+										<p class="mb-4">Tara, Serbia</p> -->
+										<div class="img-wrap img-2">
+											<img src="https://assets.codepen.io/1462889/grass.png" alt="">
+										</div>
+										<div class="img-wrap img-4">
+											<img src="https://assets.codepen.io/1462889/camp.png" alt="">
+										</div>
+										<div class="img-wrap img-5">
+											<img src="https://assets.codepen.io/1462889/Ivy.png" alt="">
+										</div>
+										<div class="img-wrap img-7">
+											<img src="https://assets.codepen.io/1462889/IvyRock.png" alt="">
+										</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <h1>
     <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
         {{ name }}
@@ -105,16 +207,16 @@
     <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
         {{ room_id }}
     </a>
-</h2>
+</h2> -->
 
-<form action="{{ url_for('User.video',room_id=room_id) }}" enctype="multipart/form-data" method="post">
+<!-- <form action="{{ url_for('User.video',room_id=room_id) }}" enctype="multipart/form-data" method="post">
     <input type="file" name="file">Upload playback
     <button type="submit">Finish</button>
-</form>
+</form> -->
 
 
-<button id="save-to-disk"   >Save To Disk</button>
-<button id="btn-start-recording"  >Start Recording</button>
+<!-- <button id="save-to-disk"   >Save To Disk</button>
+<button id="btn-start-recording"  >Start Recording</button> -->
 
 
 <!-- 千万不要删除这个article -->
