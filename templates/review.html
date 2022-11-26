@@ -20,12 +20,15 @@
             <div class="input-group-prepend" style="min-height:500px; border-radius: 20px;">
               <span class="input-group-text" style="color: black; font-size:large; font-weight:bold">Code Review</span>
             </div>
-            <textarea class="form-control" style="min-height:500px; overflow-y: scroll;" aria-label="With textarea"></textarea>
+            <textarea class="form-control" style="min-height:500px; overflow-y: scroll;" aria-label="With textarea">{{ room.code_document }}</textarea>
           </div>
     </div>
     <div></div>
     <div class="rightctnr">
-        <video id="video" width="100%" height="100%" type="video/webm" controls autoplay src="{{ url_for('static',filename=room.video_address) }}"></video>
+        {% if room.video_address %}
+            <video id="video" width="100%" height="100%" type="video/webm" controls autoplay src="{{ url_for('static',filename=room.video_address) }}"></video>
+        {% endif %}
+
     </div>
 </div>
 </body>

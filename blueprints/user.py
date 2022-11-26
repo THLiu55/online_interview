@@ -146,18 +146,21 @@ def jump(address):
 
 @user_bp.route("/finish", methods=['POST', 'GET'])
 def finish():
-    room = Room()
-    room.finished = 1
-    room.video_address = 0
+    code = request.form.get("code")
+    room_id = request.form.get("id")
+    room = Room.query.filter_by(id=room_id).first()
+    room.code_document = code
+    db.session.commit()
+    return "ok"
 
 
 @user_bp.route("/video/<room_id>", methods=['POST', 'GET'])
 def video(room_id):
     file = request.files.get("file")
     if file:
-        file.save('static\\'+room_id + ".webm")
+        file.save('static\\' + room_id + ".webm")
     room = Room.query.filter_by(id=room_id).first()
-    room.video_address = room_id+".webm"
+    room.video_address = room_id + ".webm"
     db.session.commit()
     return enter(room_id)
 
@@ -172,4 +175,3 @@ def enter(room_id):
         room.finished = 1
         db.session.commit()
         return render_template("record.html", name=user.user_name, room_id=room.id)
-

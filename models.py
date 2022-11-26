@@ -2,6 +2,7 @@ from exts import db
 from datetime import datetime
 from flask_login import UserMixin
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     user_name = db.Column(db.CHAR(200), nullable=False, unique=False)
@@ -10,6 +11,7 @@ class User(UserMixin, db.Model):
 
     def get_id(self):
         return self.user_email
+
 
 class EmailCaptchaModel(db.Model):
     __tablename__ = "email_captcha"
@@ -21,20 +23,20 @@ class EmailCaptchaModel(db.Model):
 
 class CreateInterviewModel(db.Model):
     __tablename__ = "create_interview"
-    user_email=db.Column(db.CHAR(200), default="hhh@qq.com")
-    room_id=db.Column(db.Integer,primary_key=True, autoincrement=True)
-    position = db.Column(db.CHAR(100),nullable=False, default="pos")
+    user_email = db.Column(db.CHAR(200), default="hhh@qq.com")
+    room_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    position = db.Column(db.CHAR(100), nullable=False, default="pos")
     date = db.Column(db.DATE, nullable=False, default="yyyy-mm-dd")
     time = db.Column(db.TIME, nullable=False, default="hh:mm:ss")
-    time_span = db.Column(db.Integer,nullable=False, default=20)
+    time_span = db.Column(db.Integer, nullable=False, default=20)
     interviewee_name = db.Column(db.CHAR(200), nullable=False, default="test")
 
 
 class Room(db.Model):
     __tablename__ = "room"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_email=db.Column(db.CHAR(200))
+    user_email = db.Column(db.CHAR(200))
     finished = db.Column(db.BOOLEAN, default=False)
-    video_address=db.Column(db.CHAR(255))
-    code_document=db.Column(db.Text())
-    close_time=db.Column(db.DateTime, default=datetime.now)
+    video_address = db.Column(db.CHAR(255))
+    code_document = db.Column(db.Text())
+    close_time = db.Column(db.DateTime, default=datetime.now)
