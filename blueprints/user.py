@@ -3,8 +3,8 @@ import string
 
 from flask import Blueprint, request, render_template, redirect, url_for, jsonify, session
 from forms import LoginFrom, RegisterForm, EmailCaptchaModel, ForgetFormPassword
-from flask_login import login_user, logout_user, login_required
-from models import User, Room, CreateInterviewModel
+from flask_login import logout_user, login_required
+from models import User, Room
 from exts import db, mail
 from flask_mail import Message
 from datetime import datetime
@@ -69,9 +69,7 @@ def login_check():
     login_form = LoginFrom(user_email=user_email, user_password=user_password)
     session['user_email'] = user_email
     if login_form.validate():
-        user = User.query.filter_by(user_email=user_email).first()
-        interviews = CreateInterviewModel.query.filter_by(user_email=user_email).all()
-        return render_template("schedule.html", username=user.user_name, interviews=interviews)
+        return redirect(url_for('schedule.create'))
     else:
         return render_template("login.html")
 
@@ -157,11 +155,11 @@ def finish():
 def video(room_id):
     file = request.files.get("file")
     if file:
-        file.save('templates\\'+room_id + ".webm")
+        file.save('static\\'+room_id + ".webm")
     room = Room.query.filter_by(id=room_id).first()
-    room.finished = 1
+    room.video_address = room_id+".webm"
     db.session.commit()
-    return render_template("review.html", src=room_id+".webm")
+    return enter(room_id)
 
 
 @user_bp.route("/enter/<room_id>/", methods=['POST', 'GET'])
@@ -169,7 +167,9 @@ def enter(room_id):
     room = Room.query.filter_by(id=room_id).first()
     user = User.query.filter_by(user_email=session['user_email']).first()
     if room.finished == 1:
-        return render_template("review.html", src=room_id + ".webm")
+        return render_template("review.html", room=room)
     else:
+        room.finished = 1
+        db.session.commit()
         return render_template("record.html", name=user.user_name, room_id=room.id)
 

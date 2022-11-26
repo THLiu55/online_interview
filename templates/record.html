@@ -111,13 +111,14 @@
 								<div class="card-front">
 									<div class="pricing-wrap">
 										<h4 class="mb-1" style="margin-bottom: 0;">Recording</h4>
-                    <h1 class="mb-1" style="border-bottom: none;"><a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
-                      {{ name }}
-                  </a>
-                    <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
-                        {{ room_id }}
-                    </a>
-                </h1>
+                    <h1 class="mb-1" style="border-bottom: none;">
+                        <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
+                            {{ name }}
+                        </a>
+                        <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
+                            {{ room_id }}
+                        </a>
+                    </h1>
 										<h2 class="mb-2" style="font-size: 14px;">Start record the interview</h2>
 										<p class="mb-4" style="font-size: 14px;"> and download it</p>
 										<!-- <p class="mb-1"><i class="uil uil-location-pin-alt size-22"></i></p>
@@ -175,48 +176,6 @@
 	    </div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<h1>
-    <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
-        {{ name }}
-    </a>
-
-</h1><br>
-<h2>
-    <a href="http://localhost:3001/?name={{ name }}&id={{ room_id }}" target="_blank">
-        {{ room_id }}
-    </a>
-</h2> -->
-
-<!-- <form action="{{ url_for('User.video',room_id=room_id) }}" enctype="multipart/form-data" method="post">
-    <input type="file" name="file">Upload playback
-    <button type="submit">Finish</button>
-</form> -->
-
-
-<!-- <button id="save-to-disk"   >Save To Disk</button>
-<button id="btn-start-recording"  >Start Recording</button> -->
 
 
 <!-- 千万不要删除这个article -->
@@ -2053,20 +2012,7 @@
         }, 2000);
       }
 
-      if(btnPauseRecording.innerHTML === 'Resume Recording') {
-        btnStartRecording.disabled = false;
-        chkFixSeeking.parentNode.style.display = 'none';
-        btnStartRecording.style.fontSize = 'inherit';
-        btnStartRecording.recordRTC.resumeRecording();
-        recordingPlayer.parentNode.parentNode.querySelector('h2').innerHTML = '<img src="https://www.webrtc-experiment.com/images/progress.gif">';
-        recordingPlayer.play();
 
-        btnPauseRecording.style.fontSize = '15px';
-        btnPauseRecording.innerHTML = 'Pause';
-        setTimeout(function() {
-          btnPauseRecording.disabled = false;
-        }, 2000);
-      }
     };
   </script>
 

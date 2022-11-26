@@ -5,11 +5,10 @@
   <meta charset="UTF-8">
   <title>Schedule for interview</title>
   <!-- CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-p1KAotb3W9ndluCsqePPYnjRm3c6abdnIjo0tQwYUv83VsbsYd43RuofnFAaDo0E" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../static/css/schedule.css"> -->
-  <link rel="stylesheet" href="../static/css/review.css">
+  <link rel="stylesheet" href="/static/css/review.css">
 
 </head>
 
@@ -26,7 +25,7 @@
     </div>
     <div></div>
     <div class="rightctnr">
-        <video id="video" width="100%" height="100%" type="video/webm" controls autoplay src=""></video>
+        <video id="video" width="100%" height="100%" type="video/webm" controls autoplay src="{{ url_for('static',filename=room.video_address) }}"></video>
     </div>
 </div>
 </body>

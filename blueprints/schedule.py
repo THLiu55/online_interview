@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify, session, render_template, redirec
 from models import CreateInterviewModel, User, Room
 from exts import db
 
-
 schedule_bp = Blueprint("schedule", __name__, url_prefix="/schedule")
 
 
@@ -11,7 +10,16 @@ def create():
     if request.method == "GET":
         user = User.query.filter_by(user_email=session['user_email']).first()
         interviews = CreateInterviewModel.query.filter_by(user_email=session['user_email']).all()
-        return render_template("schedule.html", username=user.user_name, interviews=interviews)
+        coming_interviews = []
+        history_interviews = []
+        for i in interviews:
+            if Room.query.filter_by(id=i.room_id).first().finished == 1:
+                history_interviews.append(i)
+            else:
+                coming_interviews.append(i)
+        history_interviews.reverse()
+        return render_template("schedule.html", username=user.user_name, coming_interviews=coming_interviews,
+                               history_interviews=history_interviews)
     else:
         pos = request.form.get("pos")
         email = request.form.get("email")
