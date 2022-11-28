@@ -12,23 +12,23 @@ from flask_cors import CORS
 
 
 # 创建一个app对象
-app = Flask(__name__)
+application = Flask(__name__)
 
 # app.config[] 配置 配置项全部放到config里
-app.config.from_object(config)
-CORS(app, resources=r'/*')
-db.init_app(app)
-mail.init_app(app)
+application.config.from_object(config)
+CORS(application, resources=r'/*')
+db.init_app(application)
+mail.init_app(application)
 # 配置数据库迁移
-migrate = Migrate(app, db)
+migrate = Migrate(application, db)
 # 配置项目蓝图
-app.register_blueprint(user_bp)
-app.register_blueprint(schedule_bp)
+application.register_blueprint(user_bp)
+application.register_blueprint(schedule_bp)
 
 
 # 配置session
 
-app.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")
+application.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")
 
 # # 配置LoginManager
 # login_manager = LoginManager()
@@ -49,10 +49,5 @@ app.secret_key = os.getenv("SECRET_KEY", "ewqr9urjewfoifd3")
 #         return curr_user
 
 
-@app.errorhandler(ValidationError)
-def validation_error(e):
-    return jsonify({"code": 400, "message": e.args})
-
-
 if __name__ == '__main__':
-    app.run()
+    application.run()
