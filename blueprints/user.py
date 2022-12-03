@@ -12,7 +12,7 @@ from werkzeug.security import generate_password_hash
 
 user_bp = Blueprint("User", __name__, url_prefix="/")
 
-
+the_email =""
 # 登陆界面
 @user_bp.route("/", methods=['GET', 'POST'])
 def login():
@@ -91,7 +91,7 @@ def my_mail():
         captcha_model = EmailCaptchaModel.query.filter_by(email=email).first()
         if captcha_model:
             captcha_model.captcha = captcha
-            captcha_model.create_time = datetime.now
+            captcha_model.create_time = datetime.now()
             db.session.commit()
         else:
             captcha_model = EmailCaptchaModel(email=email, captcha=captcha)
@@ -149,9 +149,12 @@ def finish():
     code = request.form.get("code")
     room_id = request.form.get("id")
     room = Room.query.filter_by(id=room_id).first()
-    room.code_document = code
-    db.session.commit()
-    return "ok"
+    if (room is None):
+        return "No Room Found"
+    else :
+        room.code_document = code
+        db.session.commit()
+        return "ok"
 
 
 @user_bp.route("/video/<room_id>", methods=['POST', 'GET'])
