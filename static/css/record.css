@@ -110,7 +110,7 @@ a:hover {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 1000px;
-  margin-top: 90px;
+  margin-top: 60px;
 }
 .card-3d-wrapper {
   width: 100%;

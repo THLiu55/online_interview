@@ -78,7 +78,7 @@
           <p class="time">{{ username }}</p>
         </div>
 
-        <div id="uncomingevents"class="project-boxes jsGridView">
+        <div id="uncomingevents" class="project-boxes jsGridView">
           <!--这里是面试信息块 -->
 
 
@@ -106,7 +106,7 @@
               <div class="centerbox">
                 <div class="project-box-content-header">
                   <!-- 这里是面试者名称 -->
-                  <p class="box-content-header">{{ i.interviewee_name }}</p>
+                  <p class="box-content-header">{{ i.interviewee_name }}: {{ i.room_id }}</p>
                   <!-- 这里是面试官职位 -->
                   <p class="box-content-subheader">{{ i.position }}</p>
                   <!-- 这里是面试时间跨度 -->
@@ -147,7 +147,7 @@
               </div>
               <div class="centerbox">
                 <div class="project-box-content-header">
-                  <p class="box-content-header">{{ i.interviewee_name }}</p>
+                  <p class="box-content-header">{{ i.interviewee_name }}: {{ i.room_id }}</p>
                   <p class="box-content-subheader">{{ i.position  }}</p>
                   <p class="box-content-subheader">Time span : <i>{{ i.time_span }}</i></p>
                 </div>

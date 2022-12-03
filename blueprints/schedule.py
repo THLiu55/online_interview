@@ -55,12 +55,12 @@ def get_per_interview():
     per_interview = CreateInterviewModel.query.all()
     data = []
     for i in per_interview:
-        dict = {
+        dicts = {
             "position": i.position,
             "date": i.date,
             "time": i.time,
             "time_span": i.time_span,
             "interviewee_name": i.interviewee_name
         }
-        data.append(dict)
+        data.append(dicts)
     return jsonify({"code": 200, "data": data})
