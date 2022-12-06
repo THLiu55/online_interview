@@ -16,6 +16,7 @@
     <div class="wholectnr">
         
     <div class="leftctnr">
+        <button onclick="back()" class="btn-outline-info">Back</button>
         <div class="input-group" style="min-height:600px;">
             <div class="input-group-prepend" style="min-height:500px; border-radius: 20px;">
               <span class="input-group-text" style="color: black; font-size:large; font-weight:bold">Code Review</span>
@@ -32,5 +33,9 @@
     </div>
 </div>
 </body>
-
+<script>
+    function back() {
+        history.back()
+    }
+</script>
 </html>

@@ -24,7 +24,7 @@
     </div>
     <div class='box-login'>
       <div class='fieldset-body' id='login_form'>
-          <form novalidate onsubmit="sendRegister()">
+          <form novalidate action="{{ url_for('User.register_check') }}" method="post">
 
               <p class="field">
                   <label for='user'>E-MAIL</label>
@@ -34,20 +34,20 @@
 
               <p class='field'>
                   <label for='captcha'>CAPTCHA</label>
-                  <input type='text' id='captcha' name='pass' title='CAPTCHA'/>
+                  <input type='text' id='captcha' name='captcha' title='CAPTCHA'/>
                   <button type="button" id='do_regist' title='SEND' onclick="getCaptcha()">SEND</button>
                   <span id='valida2' class='i i-close'></span>
               </p>
 
               <p class='field'>
                   <label for='username'>User Name</label>
-                  <input type='text' id='username' name='pass' title='Username'/>
+                  <input type='text' id='username' name='userName' title='Username'/>
                   <span id='valida3' class='i i-close'></span>
               </p>
 
               <p class='field'>
                   <label for='pass'>PASSWORD</label>
-                  <input type='password' id='pass' name='pass' title='Password'/>
+                  <input type='password' id='pass' name='password' title='Password'/>
                   <span id='valida4' class='i i-close'></span>
               </p>
               <p class='field'>
@@ -61,7 +61,7 @@
                          title='Keep me Signed in'/> Agree to the User Agreement
               </label>
 
-              <button type='submit' id='do_login' title='Sign up' onmousedown="sendRegister()">GET STARTED</button>
+              <button type='submit' id='do_login' title='Sign up'>GET STARTED</button>
           </form>
       </div>
     </div>
@@ -87,29 +87,32 @@
             });
     }
 
-    /*axios提交register表单逻辑*/
-    function sendRegister(){
-    var email = document.getElementById('user').value;
-    var captcha = document.getElementById('captcha').value;
-    var name = document.getElementById('username').value;
-    var password = document.getElementById('pass').value;
-    var re_password = document.getElementById('pass_re').value;
-
-    axios.post('/register', {
-        email: email,
-        captcha: captcha,
-        userName: name,
-        password: password,
-        repassword: re_password
-
-    })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+{#    /*axios提交register表单逻辑*/#}
+{#    function sendRegister(){#}
+{#    var email = document.getElementById('user').value;#}
+{#    var captcha = document.getElementById('captcha').value;#}
+{#    var name = document.getElementById('username').value;#}
+{#    var password = document.getElementById('pass').value;#}
+{#    var re_password = document.getElementById('pass_re').value;#}
+{##}
+{#    axios.post('/register', {#}
+{#        email: email,#}
+{#        captcha: captcha,#}
+{#        userName: name,#}
+{#        password: password,#}
+{#        repassword: re_password#}
+{##}
+{#    })#}
+{#        .then(function (response) {#}
+{#            console.log("here")#}
+{#            location.href="{{ url_for('User.login') }}"#}
+{#            console.log(response);#}
+{#        })#}
+{#        .catch(function (error) {#}
+{#            console.log("here")#}
+{#            console.log(error);#}
+{#        });#}
+{#}#}
 
 
 </script>

@@ -12,12 +12,24 @@ from werkzeug.security import generate_password_hash
 
 user_bp = Blueprint("User", __name__, url_prefix="/")
 
-the_email =""
+the_email = ""
+
+
 # 登陆界面
 @user_bp.route("/", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template("index.html")
+
+
+@user_bp.route("/loginpage", methods=['GET', 'POST'])
+def login_page():
+    return render_template("login.html")
+
+
+@user_bp.route("/registerpage", methods=['GET', 'POST'])
+def register_page():
+    return render_template("register.html")
 
 
 # 用户登出
@@ -31,14 +43,16 @@ def logout():
 # 注册功能
 @user_bp.route("/register", methods=['POST', 'GET'])
 def register_check():
-    data = request.get_json(silent=True)
-    user_email = data["email"]
-    user_name = data["userName"]
-    user_password = data["password"]
-    captcha = data["captcha"]
+    user_email = request.form.get("user")
+    user_name = request.form.get("userName")
+    user_password = request.form.get("password")
+    captcha = request.form.get("captcha")
     register_form = RegisterForm(user_email=user_email, user_name=user_name, user_password=user_password,
                                  captcha=captcha)
-    if register_form.validate():
+    captcha_model = EmailCaptchaModel.query.filter_by(email=user_email).first()
+
+
+    if register_form.validate() and captcha_model:
         # 密码md5加密
         hash_password = generate_password_hash(register_form.user_password.data)
         # 构建user模型
@@ -48,7 +62,7 @@ def register_check():
         user.user_password = hash_password
         db.session.add(user)
         db.session.commit()
-        return jsonify({"code": 200, "message": "Sign up successfully!"})
+        return redirect(url_for('User.login_page'))
     else:
         if register_form.errors.get("user_email"):
             return jsonify({"code": 400, "message": "invalidSignUpEmail"})
@@ -99,6 +113,7 @@ def my_mail():
             db.session.commit()
         # code:200,成功的，正常的请求
         return {'code': 200}
+
     else:
         # code:400,客户端错误
         return {"code": 400, "message": "请先传递邮箱！"}
@@ -139,19 +154,14 @@ def password_check():
         return redirect(url_for("User.login"))
 
 
-@user_bp.route("/jump/<address>", methods=['GET'])
-def jump(address):
-    return render_template(address)
-
-
 @user_bp.route("/finish", methods=['POST', 'GET'])
 def finish():
     code = request.form.get("code")
     room_id = request.form.get("id")
     room = Room.query.filter_by(id=room_id).first()
-    if (room is None):
+    if room is None:
         return "No Room Found"
-    else :
+    else:
         room.code_document = code
         db.session.commit()
         return "ok"

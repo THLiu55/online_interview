@@ -5,6 +5,14 @@ from exts import db
 schedule_bp = Blueprint("schedule", __name__, url_prefix="/schedule")
 
 
+@schedule_bp.route("/return/<room_id>")
+def back(room_id):
+    room = Room.query.filter_by(id=room_id).first()
+    room.finished = 0
+    db.session.commit()
+    return redirect(url_for('schedule.create'))
+
+
 @schedule_bp.route("/create", methods=['POST', 'GET'])
 def create():
     if request.method == "GET":
@@ -22,7 +30,7 @@ def create():
                                history_interviews=history_interviews)
     else:
         pos = request.form.get("pos")
-        email = request.form.get("email")
+        email = session['user_email']
         date = request.form.get("date")
         time = request.form.get("time")
         span = request.form.get("time_span")
@@ -64,3 +72,8 @@ def get_per_interview():
         }
         data.append(dicts)
     return jsonify({"code": 200, "data": data})
+
+
+@schedule_bp.route("/back")
+def back_schedule():
+    return redirect(url_for('schedule.back_schedule'))

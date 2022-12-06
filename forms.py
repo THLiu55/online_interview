@@ -32,21 +32,6 @@ class RegisterForm(wtforms.Form):
     captcha = wtforms.StringField(validators=[length(min=6, max=6)])
 
 
-    def validate_user_email(self, field):
-        email = field.data
-        user_model = User.query.filter_by(user_email=email).first()
-        if user_model:
-            raise ValidationError("mail")
-
-
-    def validate_captcha(self, field):
-        captcha = field.data
-        email = self.user_email.data
-        captcha_model = EmailCaptchaModel.query.filter_by(email=email).first()
-        if not captcha_model and captcha_model.captcha != captcha:
-            raise ValidationError("captcha")
-
-
 class EditProfileForm(FlaskForm):
     username=StringField('Username',validators=[DataRequired()])
     about_me=TextAreaField('About_me',validators=[Length(min=0,max=140)])
